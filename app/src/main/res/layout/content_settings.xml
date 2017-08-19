@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_height="wrap_content"
     tools:context="com.martindisch.chronoscopy.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
@@ -82,10 +81,10 @@
         android:layout_marginTop="0dp"
         android:max="10"
         android:progress="5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/settings_tvSkill"
         app:layout_constraintRight_toLeftOf="@+id/settings_tvSkillStatus"
-        app:layout_constraintTop_toTopOf="@+id/settings_tvSkillStatus"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/settings_tvSkillStatus" />
 
     <TextView
         android:id="@+id/settings_tvSkillStatus"
@@ -133,10 +132,10 @@
         android:layout_marginTop="0dp"
         android:max="10"
         android:progress="5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/settings_tvFun"
         app:layout_constraintRight_toLeftOf="@+id/settings_tvFunStatus"
-        app:layout_constraintTop_toTopOf="@+id/settings_tvFunStatus"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/settings_tvFunStatus" />
 
     <ImageView
         android:id="@+id/settings_ivPerson"
@@ -184,10 +183,10 @@
         android:layout_marginTop="0dp"
         android:max="10"
         android:progress="5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/settings_tvResponsibility"
         app:layout_constraintRight_toLeftOf="@+id/settings_tvResponsibilityStatus"
-        app:layout_constraintTop_toTopOf="@+id/settings_tvResponsibilityStatus"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/settings_tvResponsibilityStatus" />
 
     <EditText
         android:id="@+id/settings_etLeisure"
@@ -205,11 +204,13 @@
         android:id="@+id/settings_etDate"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/dateofbirth"
         android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/settings_ivPerson"
         app:layout_constraintTop_toBottomOf="@+id/settings_etLeisure" />
 </android.support.constraint.ConstraintLayout>
