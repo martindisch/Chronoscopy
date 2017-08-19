@@ -1,5 +1,6 @@
 package com.martindisch.chronoscopy;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            return true;
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
