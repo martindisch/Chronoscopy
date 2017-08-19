@@ -39,23 +39,22 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="0dp"
         android:max="10"
         android:progress="5"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/settings_tvRegret"
-        app:layout_constraintRight_toLeftOf="@+id/settings_etRegret"
-        app:layout_constraintTop_toTopOf="@+id/settings_etRegret" />
+        app:layout_constraintRight_toLeftOf="@+id/settings_tvRegretStatus"
+        app:layout_constraintTop_toTopOf="@+id/settings_tvRegretStatus" />
 
-    <EditText
-        android:id="@+id/settings_etRegret"
+    <TextView
+        android:id="@+id/settings_tvRegretStatus"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:inputType="number"
         android:text="5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_tvRegret" />
@@ -71,7 +70,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/settings_ivStar"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_etRegret" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_tvRegretStatus" />
 
     <SeekBar
         android:id="@+id/settings_sbSkill"
@@ -80,22 +79,22 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="0dp"
         android:max="10"
         android:progress="5"
         app:layout_constraintLeft_toLeftOf="@+id/settings_tvSkill"
-        app:layout_constraintRight_toLeftOf="@+id/settings_etSkill"
-        app:layout_constraintTop_toTopOf="@+id/settings_etSkill" />
+        app:layout_constraintRight_toLeftOf="@+id/settings_tvSkillStatus"
+        app:layout_constraintTop_toTopOf="@+id/settings_tvSkillStatus"
+        app:layout_constraintHorizontal_bias="0.0" />
 
-    <EditText
-        android:id="@+id/settings_etSkill"
+    <TextView
+        android:id="@+id/settings_tvSkillStatus"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:inputType="number"
         android:text="5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_tvSkill" />
@@ -110,17 +109,16 @@
         android:text="@string/fun"
         app:layout_constraintLeft_toRightOf="@+id/settings_ivStar"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_etSkill" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_tvSkillStatus" />
 
-    <EditText
-        android:id="@+id/settings_etFun"
+    <TextView
+        android:id="@+id/settings_tvFunStatus"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:inputType="number"
         android:text="5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_tvFun" />
@@ -132,12 +130,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="0dp"
         android:max="10"
         android:progress="5"
         app:layout_constraintLeft_toLeftOf="@+id/settings_tvFun"
-        app:layout_constraintRight_toLeftOf="@+id/settings_etFun"
-        app:layout_constraintTop_toTopOf="@+id/settings_etFun" />
+        app:layout_constraintRight_toLeftOf="@+id/settings_tvFunStatus"
+        app:layout_constraintTop_toTopOf="@+id/settings_tvFunStatus"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <ImageView
         android:id="@+id/settings_ivPerson"
@@ -147,7 +146,7 @@
         android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_etFun"
+        app:layout_constraintTop_toBottomOf="@+id/settings_tvFunStatus"
         app:srcCompat="@drawable/ic_person" />
 
     <TextView
@@ -163,15 +162,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/settings_ivPerson" />
 
-    <EditText
-        android:id="@+id/settings_etResponsibility"
+    <TextView
+        android:id="@+id/settings_tvResponsibilityStatus"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="24dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:inputType="number"
         android:text="5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_tvResponsibility" />
@@ -183,12 +181,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="0dp"
         android:max="10"
         android:progress="5"
         app:layout_constraintLeft_toLeftOf="@+id/settings_tvResponsibility"
-        app:layout_constraintRight_toLeftOf="@+id/settings_etResponsibility"
-        app:layout_constraintTop_toTopOf="@+id/settings_etResponsibility" />
+        app:layout_constraintRight_toLeftOf="@+id/settings_tvResponsibilityStatus"
+        app:layout_constraintTop_toTopOf="@+id/settings_tvResponsibilityStatus"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
         android:id="@+id/settings_etLeisure"
@@ -200,7 +199,7 @@
         android:hint="@string/leisure"
         android:inputType="numberDecimal"
         app:layout_constraintLeft_toRightOf="@+id/settings_ivPerson"
-        app:layout_constraintTop_toBottomOf="@+id/settings_etResponsibility" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_tvResponsibilityStatus" />
 
     <EditText
         android:id="@+id/settings_etDate"
