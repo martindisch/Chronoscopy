@@ -1,5 +1,6 @@
 package com.martindisch.chronoscopy;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +14,9 @@ import android.widget.TextView;
 public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, TextWatcher {
 
     private SeekBar mSbRegret, mSbSkill, mSbFun, mSbResponsibility;
-    private EditText mEtLeisure, mEtDob;
+    private EditText mEtLeisure, mEtDate;
     private TextView mTvRegret, mTvSkill, mTvFun, mTvResponsibility;
-    private TextInputLayout mTilDob;
+    private TextInputLayout mTilDate;
 
     private static final String mDatePattern = "^(?:(?:(?:0[1-9]|1\\d|2[0-8])\\.(?:0[1-9]|1[0-2])|(?:29|30)\\.(?:0[13-9]|1[0-2])|31\\.(?:0[13578]|1[02]))\\.[1-9]\\d{3}|29\\.02\\.(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00))$";
 
@@ -40,8 +41,8 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         mTvFun = (TextView) findViewById(R.id.settings_tvFunStatus);
         mTvResponsibility = (TextView) findViewById(R.id.settings_tvResponsibilityStatus);
         mEtLeisure = (EditText) findViewById(R.id.settings_etLeisure);
-        mEtDob = (EditText) findViewById(R.id.settings_etDate);
-        mTilDob = (TextInputLayout) findViewById(R.id.settings_tilDate);
+        mEtDate = (EditText) findViewById(R.id.settings_etDate);
+        mTilDate = (TextInputLayout) findViewById(R.id.settings_tilDate);
 
 
         // Set listeners
@@ -49,7 +50,16 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         mSbSkill.setOnSeekBarChangeListener(this);
         mSbFun.setOnSeekBarChangeListener(this);
         mSbResponsibility.setOnSeekBarChangeListener(this);
-        mEtDob.addTextChangedListener(this);
+        mEtDate.addTextChangedListener(this);
+
+        // Restore settings
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        mSbRegret.setProgress(prefs.getInt("regret", 5));
+        mSbSkill.setProgress(prefs.getInt("skill", 5));
+        mSbFun.setProgress(prefs.getInt("fun", 5));
+        mSbResponsibility.setProgress(prefs.getInt("responsibility", 5));
+        mEtLeisure.setText(prefs.getFloat("leisure", 31) + "");
+        mEtDate.setText(prefs.getString("date", "01.01.1970"));
     }
 
     /**
@@ -79,10 +89,33 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
     @Override
     public void afterTextChanged(Editable editable) {
         if (editable.toString().matches(mDatePattern)) {
-            mTilDob.setError(null);
+            mTilDate.setError(null);
         } else {
-            mTilDob.setError(getString(R.string.error_date));
+            mTilDate.setError(getString(R.string.error_date));
         }
+    }
+
+    /**
+     * Save settings.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("regret", mSbRegret.getProgress());
+        editor.putInt("skill", mSbSkill.getProgress());
+        editor.putInt("fun", mSbFun.getProgress());
+        editor.putInt("responsibility", mSbResponsibility.getProgress());
+        String sLeisure = mEtLeisure.getText().toString();
+        if (sLeisure.length() > 0) {
+            editor.putFloat("leisure", Float.parseFloat(sLeisure));
+        }
+        String sDate = mEtDate.getText().toString();
+        if (sDate.matches(mDatePattern)) {
+            editor.putString("date", sDate);
+        }
+        editor.apply();
     }
 
     @Override
