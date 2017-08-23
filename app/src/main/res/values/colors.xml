@@ -6,4 +6,5 @@
     <color name="overview_today">#d50000</color>
     <color name="overview_spent">#ef9933</color>
     <color name="overview_evaluation">#387ff4</color>
+    <color name="light_grey">#E0E0E0</color>
 </resources>
