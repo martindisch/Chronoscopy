@@ -115,7 +115,7 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         if (sDate.matches(mDatePattern)) {
             editor.putString("date", sDate);
         }
-        editor.apply();
+        editor.commit();
     }
 
     @Override
