@@ -16,4 +16,5 @@
     <string name="title_activity_new_activity">New Activity</string>
     <string name="name">Name</string>
     <string name="date">Date</string>
+    <string name="error_time">Use format \'hh:mm\'</string>
 </resources>
