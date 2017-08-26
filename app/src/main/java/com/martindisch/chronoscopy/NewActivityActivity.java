@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class NewActivityActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
     private SeekBar mSbRegret, mSbSkill, mSbFun;
@@ -21,7 +25,7 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
     private TextInputLayout mTilDate, mTilTime;
 
     private static final String mDatePattern = "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$";
-    private static final String mTimePattern = "^\\d+:[0-5]\\d$";
+    private static final String mTimePattern = "^(\\d+:)?[0-5]?\\d$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,9 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         });
+
+        // Set input
+        mEtDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
     }
 
     /**
