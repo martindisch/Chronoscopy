@@ -9,7 +9,7 @@
     <string name="responsibility">Responsibility</string>
     <string name="leisure">Leisure</string>
     <string name="dateofbirth">Date of birth</string>
-    <string name="error_date">Use format \'DD.MM.YYYY\'</string>
+    <string name="error_date">Use format \'YYYY-MM-DD\'</string>
     <string name="todays_score">Today\'s Score</string>
     <string name="spent_time">Spent Time</string>
     <string name="evaluation">Evaluation</string>

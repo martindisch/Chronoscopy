@@ -18,7 +18,7 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
     private TextView mTvRegret, mTvSkill, mTvFun, mTvResponsibility;
     private TextInputLayout mTilDate;
 
-    private static final String mDatePattern = "^(?:(?:(?:0[1-9]|1\\d|2[0-8])\\.(?:0[1-9]|1[0-2])|(?:29|30)\\.(?:0[13-9]|1[0-2])|31\\.(?:0[13578]|1[02]))\\.[1-9]\\d{3}|29\\.02\\.(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00))$";
+    private static final String mDatePattern = "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         mSbFun.setProgress(prefs.getInt("fun", 5));
         mSbResponsibility.setProgress(prefs.getInt("responsibility", 5));
         mEtLeisure.setText(prefs.getFloat("leisure", 31) + "");
-        mEtDate.setText(prefs.getString("date", "01.01.1970"));
+        mEtDate.setText(prefs.getString("date", "1970-01-01"));
     }
 
     /**
