@@ -101,13 +101,13 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         switch (seekBar.getId()) {
-            case R.id.settings_sbRegret:
+            case R.id.newactivity_sbRegret:
                 mTvRegret.setText(String.valueOf(seekBar.getProgress()));
                 break;
-            case R.id.settings_sbSkill:
+            case R.id.newactivity_sbSkill:
                 mTvSkill.setText(String.valueOf(seekBar.getProgress()));
                 break;
-            case R.id.settings_sbFun:
+            case R.id.newactivity_sbFun:
                 mTvFun.setText(String.valueOf(seekBar.getProgress()));
                 break;
         }
