@@ -1,11 +1,14 @@
 package com.martindisch.chronoscopy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -75,6 +78,21 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_new_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_save) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**
