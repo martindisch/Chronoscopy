@@ -3,9 +3,231 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.martindisch.chronoscopy.NewActivityActivity"
     tools:showIn="@layout/activity_new_activity">
+
+    <ImageView
+        android:id="@+id/newactivity_ivName"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/newactivity_etName"
+        app:srcCompat="@drawable/ic_pencil" />
+
+    <EditText
+        android:id="@+id/newactivity_etName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textCapWords"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/newactivity_ivName"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/newactivity_ivDate"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/newactivity_tilDate"
+        app:srcCompat="@drawable/ic_calendar" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/newactivity_tilDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="24dp"
+        app:errorEnabled="true"
+        app:layout_constraintLeft_toRightOf="@+id/newactivity_ivDate"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newactivity_etName">
+
+        <EditText
+            android:id="@+id/newactivity_etDate"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/date"
+            android:inputType="date" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/newactivity_tilTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="0dp"
+        app:errorEnabled="true"
+        app:layout_constraintLeft_toRightOf="@+id/newactivity_ivTime"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newactivity_tilDate">
+
+        <EditText
+            android:id="@+id/newactivity_etTime"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/spent_time"
+            android:inputType="time" />
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/newactivity_ivTime"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/newactivity_tilTime"
+        app:srcCompat="@drawable/ic_clock" />
+
+    <ImageView
+        android:id="@+id/newactivity_ivStar"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newactivity_tilTime"
+        app:srcCompat="@drawable/ic_star" />
+
+    <TextView
+        android:id="@+id/newactivity_tvRegret"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/regret"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/newactivity_ivStar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/newactivity_ivStar" />
+
+    <SeekBar
+        android:id="@+id/newactivity_sbRegret"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:max="10"
+        android:progress="5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/newactivity_tvRegret"
+        app:layout_constraintRight_toLeftOf="@+id/newactivity_tvRegretStatus"
+        app:layout_constraintTop_toTopOf="@+id/newactivity_tvRegretStatus" />
+
+    <TextView
+        android:id="@+id/newactivity_tvRegretStatus"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:text="5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newactivity_tvRegret" />
+
+    <TextView
+        android:id="@+id/newactivity_tvSkill"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/skill"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/newactivity_ivStar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newactivity_tvRegretStatus" />
+
+    <SeekBar
+        android:id="@+id/newactivity_sbSkill"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:max="10"
+        android:progress="5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/newactivity_tvSkill"
+        app:layout_constraintRight_toLeftOf="@+id/newactivity_tvSkillStatus"
+        app:layout_constraintTop_toTopOf="@+id/newactivity_tvSkillStatus" />
+
+    <TextView
+        android:id="@+id/newactivity_tvSkillStatus"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:text="5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newactivity_tvSkill" />
+
+    <TextView
+        android:id="@+id/newactivity_tvFun"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/fun"
+        app:layout_constraintLeft_toRightOf="@+id/newactivity_ivStar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newactivity_tvSkillStatus" />
+
+    <TextView
+        android:id="@+id/newactivity_tvFunStatus"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:text="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newactivity_tvFun" />
+
+    <SeekBar
+        android:id="@+id/newactivity_sbFun"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:max="10"
+        android:progress="5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/newactivity_tvFun"
+        app:layout_constraintRight_toLeftOf="@+id/newactivity_tvFunStatus"
+        app:layout_constraintTop_toTopOf="@+id/newactivity_tvFunStatus" />
 
 </android.support.constraint.ConstraintLayout>

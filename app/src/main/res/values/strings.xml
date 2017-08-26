@@ -14,4 +14,6 @@
     <string name="spent_time">Spent Time</string>
     <string name="evaluation">Evaluation</string>
     <string name="title_activity_new_activity">New Activity</string>
+    <string name="name">Name</string>
+    <string name="date">Date</string>
 </resources>
