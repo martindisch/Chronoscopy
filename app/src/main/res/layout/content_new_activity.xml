@@ -131,14 +131,13 @@
 
     <SeekBar
         android:id="@+id/newactivity_sbRegret"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
-        android:max="10"
-        android:progress="5"
+        android:max="40"
+        android:progress="20"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/newactivity_tvRegret"
         app:layout_constraintRight_toLeftOf="@+id/newactivity_tvRegretStatus"
@@ -152,7 +151,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:text="5"
+        android:text="3.0"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newactivity_tvRegret" />
 
@@ -171,14 +170,13 @@
 
     <SeekBar
         android:id="@+id/newactivity_sbSkill"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
-        android:max="10"
-        android:progress="5"
+        android:max="40"
+        android:progress="20"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/newactivity_tvSkill"
         app:layout_constraintRight_toLeftOf="@+id/newactivity_tvSkillStatus"
@@ -192,7 +190,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:text="5"
+        android:text="3.0"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newactivity_tvSkill" />
 
@@ -217,21 +215,20 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center_horizontal"
-        android:text="5"
+        android:text="3.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newactivity_tvFun" />
 
     <SeekBar
         android:id="@+id/newactivity_sbFun"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
-        android:max="10"
-        android:progress="5"
+        android:max="40"
+        android:progress="20"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/newactivity_tvFun"
         app:layout_constraintRight_toLeftOf="@+id/newactivity_tvFunStatus"
