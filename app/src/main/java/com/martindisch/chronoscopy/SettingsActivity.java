@@ -54,10 +54,10 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
 
         // Restore settings
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
-        mSbRegret.setProgress(prefs.getInt("regret", 5));
-        mSbSkill.setProgress(prefs.getInt("skill", 5));
-        mSbFun.setProgress(prefs.getInt("fun", 5));
-        mSbResponsibility.setProgress(prefs.getInt("responsibility", 5));
+        mSbRegret.setProgress(prefs.getInt("regret", 6) - 1);
+        mSbSkill.setProgress(prefs.getInt("skill", 6) - 1);
+        mSbFun.setProgress(prefs.getInt("fun", 6) - 1);
+        mSbResponsibility.setProgress(prefs.getInt("responsibility", 6) - 1);
         mEtLeisure.setText(prefs.getFloat("leisure", 31) + "");
         mEtDate.setText(prefs.getString("date", "1970-01-01"));
     }
@@ -69,16 +69,16 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         switch (seekBar.getId()) {
             case R.id.settings_sbRegret:
-                mTvRegret.setText(String.valueOf(seekBar.getProgress()));
+                mTvRegret.setText(String.valueOf(seekBar.getProgress() + 1));
                 break;
             case R.id.settings_sbSkill:
-                mTvSkill.setText(String.valueOf(seekBar.getProgress()));
+                mTvSkill.setText(String.valueOf(seekBar.getProgress() + 1));
                 break;
             case R.id.settings_sbFun:
-                mTvFun.setText(String.valueOf(seekBar.getProgress()));
+                mTvFun.setText(String.valueOf(seekBar.getProgress() + 1));
                 break;
             case R.id.settings_sbResponsibility:
-                mTvResponsibility.setText(String.valueOf(seekBar.getProgress()));
+                mTvResponsibility.setText(String.valueOf(seekBar.getProgress() + 1));
                 break;
         }
     }
@@ -103,10 +103,10 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         super.onPause();
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("regret", mSbRegret.getProgress());
-        editor.putInt("skill", mSbSkill.getProgress());
-        editor.putInt("fun", mSbFun.getProgress());
-        editor.putInt("responsibility", mSbResponsibility.getProgress());
+        editor.putInt("regret", mSbRegret.getProgress() + 1);
+        editor.putInt("skill", mSbSkill.getProgress() + 1);
+        editor.putInt("fun", mSbFun.getProgress() + 1);
+        editor.putInt("responsibility", mSbResponsibility.getProgress() + 1);
         String sLeisure = mEtLeisure.getText().toString();
         if (sLeisure.length() > 0) {
             editor.putFloat("leisure", Float.parseFloat(sLeisure));
