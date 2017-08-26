@@ -1,7 +1,7 @@
 package com.martindisch.chronoscopy;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class NewActivityActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
     private SeekBar mSbRegret, mSbSkill, mSbFun;
-    private EditText mEtDate, mEtTime;
+    private EditText mEtName, mEtDate, mEtTime;
     private TextView mTvRegret, mTvSkill, mTvFun;
     private TextInputLayout mTilDate, mTilTime;
 
@@ -43,6 +43,7 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
         mTvFun = (TextView) findViewById(R.id.newactivity_tvFunStatus);
         mTilDate = (TextInputLayout) findViewById(R.id.newactivity_tilDate);
         mTilTime = (TextInputLayout) findViewById(R.id.newactivity_tilTime);
+        mEtName = (EditText) findViewById(R.id.newactivity_etName);
         mEtDate = (EditText) findViewById(R.id.newactivity_etDate);
         mEtTime = (EditText) findViewById(R.id.newactivity_etTime);
 
@@ -80,6 +81,20 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
         });
     }
 
+    /**
+     * Returns if both EditTexts match their respective regex and a name is filled in.
+     *
+     * @return true if inputs are valid
+     */
+    private boolean isInputValid() {
+        String dateString = mEtDate.getText().toString();
+        String timeString = mEtTime.getText().toString();
+        String nameString = mEtName.getText().toString();
+        return dateString.matches(mDatePattern) &&
+                timeString.matches(mTimePattern) &&
+                nameString.length() > 0;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_new_activity, menu);
@@ -90,7 +105,13 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_save) {
-            finish();
+            if (isInputValid()) {
+                // TODO: check if activity exists already
+                // TODO: otherwise, save usage
+                finish();
+            } else {
+                Snackbar.make(mTvFun, R.string.invalid_inputs, Snackbar.LENGTH_LONG).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }

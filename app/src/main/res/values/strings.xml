@@ -18,4 +18,5 @@
     <string name="date">Date</string>
     <string name="error_time">Use format \'hh:mm\'</string>
     <string name="save">Save</string>
+    <string name="invalid_inputs">Some inputs are invalid</string>
 </resources>
