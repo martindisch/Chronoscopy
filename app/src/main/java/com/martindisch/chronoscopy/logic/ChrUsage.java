@@ -7,7 +7,7 @@ import com.orm.SugarRecord;
  */
 public class ChrUsage extends SugarRecord {
 
-    private ChrActivity activity;
+    private long activityId;
     private String date;
     private String time;
 
@@ -19,22 +19,22 @@ public class ChrUsage extends SugarRecord {
     /**
      * Instantiate a new activity usage.
      *
-     * @param activity Reference to the activity
+     * @param activityId Id of the activity
      * @param date The date in ISO 8601 (YYYY-MM-DD)
      * @param time The duration in minutes or h:mm/hh:mm
      */
-    public ChrUsage(ChrActivity activity, String date, String time) {
-        this.activity = activity;
+    public ChrUsage(long activityId, String date, String time) {
+        this.activityId = activityId;
         this.date = date;
         this.time = time;
     }
 
-    public ChrActivity getActivity() {
-        return activity;
+    public long getActivityId() {
+        return activityId;
     }
 
-    public void setActivity(ChrActivity activity) {
-        this.activity = activity;
+    public void setActivity(long activityId) {
+        this.activityId = activityId;
     }
 
     public String getDate() {
