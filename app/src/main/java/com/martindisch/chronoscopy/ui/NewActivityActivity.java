@@ -14,9 +14,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.martindisch.chronoscopy.R;
+import com.martindisch.chronoscopy.logic.ChrActivity;
+import com.martindisch.chronoscopy.logic.ChrUsage;
+import com.orm.SugarContext;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class NewActivityActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
@@ -33,6 +35,9 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_activity);
+
+        // Initialize SugarORM connection
+        SugarContext.init(this);
 
         // Prepare toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -115,8 +120,30 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
         int id = item.getItemId();
         if (id == R.id.action_save) {
             if (isInputValid()) {
-                // TODO: check if activity exists already
-                // TODO: otherwise, save usage
+                // Fetch properties
+                String name = mEtName.getText().toString();
+                double regret = (mSbRegret.getProgress() + 10) / 10.0;
+                double skill = (mSbSkill.getProgress() + 10) / 10.0;
+                double fun = (mSbFun.getProgress() + 10) / 10.0;
+                // Instantiate new activity
+                ChrActivity activity = new ChrActivity(name, regret, skill, fun);
+                long activityId;
+                // Save or update activity
+                if (ChrActivity.count(ChrActivity.class, "name = ?", new String[] {name}) > 0) {
+                    // Activity exists already, so update it
+                    activityId = activity.update();
+                } else {
+                    // New activity, save it
+                    activityId = activity.save();
+                }
+
+                // Instantiate the usage
+                ChrUsage usage = new ChrUsage(
+                        activityId, mEtDate.getText().toString(), mEtTime.getText().toString()
+                );
+                // Save the usage
+                usage.save();
+
                 finish();
             } else {
                 Snackbar.make(mTvFun, R.string.invalid_inputs, Snackbar.LENGTH_LONG).show();
@@ -141,6 +168,13 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
                 mTvFun.setText(String.valueOf((seekBar.getProgress() + 10) / 10.0));
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Terminate SugarORM connection
+        SugarContext.terminate();
     }
 
     @Override
