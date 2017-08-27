@@ -34,6 +34,13 @@ public class ChrActivity extends SugarRecord {
         this.fun = fun;
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "ChrActivity[id=%d, name=%s, regret=%.1f, skill=%.1f, fun=%.1f]",
+                getId(), name, regret, skill, fun);
+    }
+
     public String getName() {
         return name;
     }

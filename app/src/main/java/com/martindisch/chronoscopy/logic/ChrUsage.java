@@ -29,6 +29,14 @@ public class ChrUsage extends SugarRecord {
         this.time = time;
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "ChrUsage[id=%d, activityId=%d, date=%s, time=%s]",
+                getId(), activityId, date, time
+        );
+    }
+
     public long getActivityId() {
         return activityId;
     }
