@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.martindisch.chronoscopy.R;
+import com.orm.SugarContext;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize SugarORM connection
+        SugarContext.init(this);
 
         // Prepare toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -76,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Terminate SugarORM connection
+        SugarContext.terminate();
     }
 
     /**
