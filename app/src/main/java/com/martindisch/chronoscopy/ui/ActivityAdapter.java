@@ -27,10 +27,15 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ActivityAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final ActivityAdapter.ViewHolder holder, int position) {
         holder.tvName.setText(mActivities.get(position).getName());
         holder.tvValue.setText("X.Y / h");
-        // TODO: register OnClickListener
+        holder.clRoot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: open activity activity
+            }
+        });
     }
 
     @Override
@@ -40,13 +45,15 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvName;
-        public TextView tvValue;
+        private TextView tvName;
+        private TextView tvValue;
+        private View clRoot;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             tvName = (TextView) itemView.findViewById(R.id.item_activity_tvName);
             tvValue = (TextView) itemView.findViewById(R.id.item_activity_tvValue);
+            clRoot = itemView.findViewById(R.id.item_activity_clRoot);
         }
     }
 }
