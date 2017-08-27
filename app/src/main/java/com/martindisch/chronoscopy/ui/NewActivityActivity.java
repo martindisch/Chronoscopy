@@ -16,10 +16,10 @@ import android.widget.TextView;
 import com.martindisch.chronoscopy.R;
 import com.martindisch.chronoscopy.logic.ChrActivity;
 import com.martindisch.chronoscopy.logic.ChrUsage;
-import com.orm.SugarContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class NewActivityActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
@@ -35,9 +35,6 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_activity);
-
-        // Initialize SugarORM connection
-        SugarContext.init(this);
 
         // Prepare toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -127,11 +124,16 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
                 double fun = (mSbFun.getProgress() + 10) / 10.0;
                 // Instantiate new activity
                 ChrActivity activity = new ChrActivity(name, regret, skill, fun);
+                // Get list with activity in case it already exists
+                List<ChrActivity> previous = ChrActivity.find(
+                        ChrActivity.class, "name = ?", name);
                 long activityId;
                 // Save or update activity
-                if (ChrActivity.count(ChrActivity.class, "name = ?", new String[] {name}) > 0) {
+                if (previous.size() > 0) {
                     // Activity exists already, so update it
-                    activityId = activity.update();
+                    activity.update();
+                    // Get activity id because SugarORM won't return the right one in update()
+                    activityId = previous.get(0).getId();
                 } else {
                     // New activity, save it
                     activityId = activity.save();
@@ -168,13 +170,6 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
                 mTvFun.setText(String.valueOf((seekBar.getProgress() + 10) / 10.0));
                 break;
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Terminate SugarORM connection
-        SugarContext.terminate();
     }
 
     @Override
