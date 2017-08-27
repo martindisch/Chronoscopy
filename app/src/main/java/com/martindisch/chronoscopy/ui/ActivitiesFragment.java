@@ -1,4 +1,4 @@
-package com.martindisch.chronoscopy;
+package com.martindisch.chronoscopy.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.martindisch.chronoscopy.R;
 
 
 public class ActivitiesFragment extends Fragment {

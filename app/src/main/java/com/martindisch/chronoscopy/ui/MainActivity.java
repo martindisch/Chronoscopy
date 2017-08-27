@@ -1,4 +1,4 @@
-package com.martindisch.chronoscopy;
+package com.martindisch.chronoscopy.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.martindisch.chronoscopy.R;
 
 public class MainActivity extends AppCompatActivity {
 

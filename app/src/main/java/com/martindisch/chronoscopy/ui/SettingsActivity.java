@@ -1,4 +1,4 @@
-package com.martindisch.chronoscopy;
+package com.martindisch.chronoscopy.ui;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.martindisch.chronoscopy.R;
 
 public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, TextWatcher {
 

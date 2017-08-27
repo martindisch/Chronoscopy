@@ -1,4 +1,4 @@
-package com.martindisch.chronoscopy;
+package com.martindisch.chronoscopy.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.martindisch.chronoscopy.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
