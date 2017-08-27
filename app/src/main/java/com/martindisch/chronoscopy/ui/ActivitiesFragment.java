@@ -41,6 +41,7 @@ public class ActivitiesFragment extends Fragment {
         mRvActivities.setLayoutManager(layoutManager);
         mRvActivities.addItemDecoration(new DividerItemDecoration(getActivity(),
                 layoutManager.getOrientation()));
+        mRvActivities.setHasFixedSize(true);
 
         // Set adapter
         List<ChrActivity> activities = ChrActivity.find(
