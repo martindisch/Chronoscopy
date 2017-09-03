@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.martindisch.chronoscopy.R;
+import com.martindisch.chronoscopy.logic.ChrActivity;
 import com.martindisch.chronoscopy.logic.ChrUsage;
 
 import java.util.List;
@@ -28,7 +29,9 @@ public class UsageAdapter extends RecyclerView.Adapter<UsageAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final UsageAdapter.ViewHolder holder, int position) {
-        holder.tvName.setText(mUsages.get(position).getActivityId() + "");
+        holder.tvName.setText(
+                ChrActivity.findById(
+                        ChrActivity.class, mUsages.get(position).getActivityId()).getName());
         holder.tvValue.setText("2.1");
         holder.tvTime.setText(mUsages.get(position).getTime());
         holder.clRoot.setOnClickListener(new View.OnClickListener() {

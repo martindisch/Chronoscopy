@@ -46,7 +46,7 @@ public class UsagesFragment extends Fragment {
 
         // Set adapter
         List<ChrUsage> usages = ChrUsage.find(
-                ChrUsage.class, null, null, null, "date DESC", null
+                ChrUsage.class, null, null, null, "date DESC, id DESC", null
         );
         mAdapter = new UsageAdapter(usages);
         mRvUsages.setAdapter(mAdapter);
