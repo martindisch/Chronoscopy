@@ -33,7 +33,7 @@ public class UsageAdapter extends RecyclerView.Adapter<UsageAdapter.ViewHolder> 
                 ChrActivity.findById(
                         ChrActivity.class, mUsages.get(position).getActivityId()).getName());
         holder.tvValue.setText("2.1");
-        holder.tvTime.setText(mUsages.get(position).getTime());
+        holder.tvTime.setText(mUsages.get(position).getTimeWorded());
         holder.clRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
