@@ -1,5 +1,6 @@
 package com.martindisch.chronoscopy.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -88,8 +89,16 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         });
 
-        // Set input
+        // Set default date
         mEtDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        // Load input if this is an existing activity
+        Intent i = getIntent();
+        if (i.hasExtra("name")) {
+            mEtName.setText(i.getStringExtra("name"));
+            mSbRegret.setProgress((int) (i.getDoubleExtra("regret", 20.0) * 10 - 10));
+            mSbSkill.setProgress((int) (i.getDoubleExtra("skill", 20.0) * 10 - 10));
+            mSbFun.setProgress((int) (i.getDoubleExtra("fun", 20.0) * 10 - 10));
+        }
     }
 
     /**

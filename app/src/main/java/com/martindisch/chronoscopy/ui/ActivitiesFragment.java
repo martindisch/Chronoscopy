@@ -55,7 +55,7 @@ public class ActivitiesFragment extends Fragment {
                 List<ChrActivity> activities = ChrActivity.find(
                         ChrActivity.class, null, null, null, "name ASC", null
                 );
-                mAdapter = new ActivityAdapter(activities);
+                mAdapter = new ActivityAdapter(activities, getContext());
                 // Update RecyclerView in UI thread
                 mRvActivities.post(new Runnable() {
                     @Override

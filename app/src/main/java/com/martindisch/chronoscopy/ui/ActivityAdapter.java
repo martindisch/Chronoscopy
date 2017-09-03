@@ -1,5 +1,7 @@
 package com.martindisch.chronoscopy.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +15,12 @@ import java.util.List;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
 
+    private Context mContext;
     private List<ChrActivity> mActivities;
 
-    public ActivityAdapter(List<ChrActivity> mActivities) {
+    public ActivityAdapter(List<ChrActivity> mActivities, Context context) {
         this.mActivities = mActivities;
+        this.mContext = context;
     }
 
     @Override
@@ -33,7 +37,13 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         holder.clRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: open activity activity
+                ChrActivity activity = mActivities.get(holder.getAdapterPosition());
+                Intent i = new Intent(mContext, NewActivityActivity.class);
+                i.putExtra("name", activity.getName());
+                i.putExtra("regret", activity.getRegret());
+                i.putExtra("skill", activity.getSkill());
+                i.putExtra("fun", activity.getFun());
+                mContext.startActivity(i);
             }
         });
     }
