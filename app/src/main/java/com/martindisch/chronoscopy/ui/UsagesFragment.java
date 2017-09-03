@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.martindisch.chronoscopy.R;
-import com.martindisch.chronoscopy.logic.ChrActivity;
 import com.martindisch.chronoscopy.logic.ChrUsage;
 
 import java.util.List;
@@ -43,14 +42,28 @@ public class UsagesFragment extends Fragment {
         mRvUsages.addItemDecoration(new DividerItemDecoration(getActivity(),
                 layoutManager.getOrientation()));
         mRvUsages.setHasFixedSize(true);
-
-        // Set adapter
-        List<ChrUsage> usages = ChrUsage.find(
-                ChrUsage.class, null, null, null, "date DESC, id DESC", null
-        );
-        mAdapter = new UsageAdapter(usages);
-        mRvUsages.setAdapter(mAdapter);
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Request from DB off UI thread
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<ChrUsage> usages = ChrUsage.find(
+                        ChrUsage.class, null, null, null, "date DESC, id DESC", null
+                );
+                mAdapter = new UsageAdapter(usages);
+                // Update RecyclerView in UI thread
+                mRvUsages.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRvUsages.setAdapter(mAdapter);
+                    }
+                });
+            }
+        }).start();
+    }
 }

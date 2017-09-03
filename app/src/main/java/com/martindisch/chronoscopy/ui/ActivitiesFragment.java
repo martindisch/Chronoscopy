@@ -42,14 +42,28 @@ public class ActivitiesFragment extends Fragment {
         mRvActivities.addItemDecoration(new DividerItemDecoration(getActivity(),
                 layoutManager.getOrientation()));
         mRvActivities.setHasFixedSize(true);
-
-        // Set adapter
-        List<ChrActivity> activities = ChrActivity.find(
-                ChrActivity.class, null, null, null, "name ASC", null
-        );
-        mAdapter = new ActivityAdapter(activities);
-        mRvActivities.setAdapter(mAdapter);
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Request from DB off UI thread
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<ChrActivity> activities = ChrActivity.find(
+                        ChrActivity.class, null, null, null, "name ASC", null
+                );
+                mAdapter = new ActivityAdapter(activities);
+                // Update RecyclerView in UI thread
+                mRvActivities.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRvActivities.setAdapter(mAdapter);
+                    }
+                });
+            }
+        }).start();
+    }
 }
