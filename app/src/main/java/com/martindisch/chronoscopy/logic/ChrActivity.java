@@ -17,15 +17,16 @@ public class ChrActivity extends SugarRecord {
     /**
      * Default constructor, necessary for SugarRecord.
      */
-    public ChrActivity() {}
+    public ChrActivity() {
+    }
 
     /**
      * Instantiate a new activity.
      *
-     * @param name The activity's unique name
-     * @param regret The regret value in [1.0, 5.0]
-     * @param skill The skill value in [1.0, 5.0]
-     * @param fun The fun value in [1.0, 5.0]
+     * @param name   the activity's unique name
+     * @param regret the regret value in [1.0, 5.0]
+     * @param skill  the skill value in [1.0, 5.0]
+     * @param fun    the fun value in [1.0, 5.0]
      */
     public ChrActivity(String name, double regret, double skill, double fun) {
         this.name = name;

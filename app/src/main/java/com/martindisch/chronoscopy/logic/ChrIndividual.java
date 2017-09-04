@@ -17,12 +17,12 @@ public class ChrIndividual {
     /**
      * Create a new instance of ChrIndividual.
      *
-     * @param regret         How important it is not to regret wasted time [1, 10]
-     * @param skill          How important it is to gain skills [1, 10]
-     * @param fun            How important it is to have fun [1, 10]
-     * @param responsibility How responsible the individual is [1, 10]
-     * @param age            The individual's age in years
-     * @param leisure        Number of hours of free time per week
+     * @param regret         how important it is not to regret wasted time in [1, 10]
+     * @param skill          how important it is to gain skills in [1, 10]
+     * @param fun            how important it is to have fun in [1, 10]
+     * @param responsibility how responsible the individual is in [1, 10]
+     * @param age            the individual's age in years
+     * @param leisure        number of hours of free time per week
      */
     public ChrIndividual(int regret, int skill, int fun, int responsibility,
                          int age, double leisure) {
@@ -37,12 +37,12 @@ public class ChrIndividual {
     /**
      * Create a new instance of ChrIndividual.
      *
-     * @param regret         How important it is not to regret wasted time [1, 10]
-     * @param skill          How important it is to gain skills [1, 10]
-     * @param fun            How important it is to have fun [1, 10]
-     * @param responsibility How responsible the individual is [1, 10]
-     * @param dateOfBirth    The individual's date of birth as yyyy-MM-dd
-     * @param leisure        Number of hours of free time per week
+     * @param regret         how important it is not to regret wasted time in [1, 10]
+     * @param skill          how important it is to gain skills in [1, 10]
+     * @param fun            how important it is to have fun in [1, 10]
+     * @param responsibility how responsible the individual is in [1, 10]
+     * @param dateOfBirth    the individual's date of birth as yyyy-MM-dd
+     * @param leisure        number of hours of free time per week
      */
     public ChrIndividual(int regret, int skill, int fun, int responsibility,
                          String dateOfBirth, double leisure) {

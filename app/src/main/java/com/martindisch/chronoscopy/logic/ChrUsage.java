@@ -14,14 +14,15 @@ public class ChrUsage extends SugarRecord {
     /**
      * Default constructor, necessary for SugarRecord.
      */
-    public ChrUsage() {}
+    public ChrUsage() {
+    }
 
     /**
      * Instantiate a new activity usage.
      *
-     * @param activityId Id of the activity
-     * @param date The date in ISO 8601 (YYYY-MM-DD)
-     * @param time The duration in minutes or h:mm/hh:mm
+     * @param activityId id of the activity
+     * @param date       the date in ISO 8601 (yyyy-MM-dd)
+     * @param time       the duration in minutes or h:mm/hh:mm
      */
     public ChrUsage(long activityId, String date, String time) {
         this.activityId = activityId;
@@ -32,7 +33,7 @@ public class ChrUsage extends SugarRecord {
     /**
      * Returns the usage's time in language form, e.g. 7 hours, 23 minutes.
      *
-     * @return The time in language form
+     * @return the time in language form
      */
     public String getTimeWorded() {
         String time = getTime();
