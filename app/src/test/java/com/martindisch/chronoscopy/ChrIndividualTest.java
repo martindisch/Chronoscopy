@@ -114,4 +114,17 @@ public class ChrIndividualTest {
         activity = new ChrActivity("Something impossible", 5, 5, 5);
         assertEquals(67.8, individual.getScorePerHour(activity), 0.000001);
     }
+
+    @Test
+    public void scoreTest() throws Exception {
+        ChrIndividual individual = new ChrIndividual(9, 8, 5, 8, 22, 43.5);
+        ChrActivity activity = new ChrActivity("Gaming", 2, 1, 4);
+        assertEquals(1.8, individual.getScore(activity, 3.582), 0.000001);
+        activity = new ChrActivity("Learning", 4, 5, 2);
+        assertEquals(2.8, individual.getScore(activity, 0.12), 0.000001);
+        activity = new ChrActivity("Being sick", 1, 1, 1);
+        assertEquals(0, individual.getScore(activity, 8), 0.000001);
+        activity = new ChrActivity("Something impossible", 5, 5, 5);
+        assertEquals(291.2, individual.getScore(activity, 4.29461239), 0.000001);
+    }
 }

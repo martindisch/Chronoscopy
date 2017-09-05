@@ -93,6 +93,22 @@ public class ChrIndividual {
     }
 
     /**
+     * Returns the score of this activity for this individual.
+     *
+     * @param activity the activity
+     * @param hours the duration of the activity in hours
+     * @return the score of the activity for this individual
+     */
+    public double getScore(ChrActivity activity, double hours) {
+        // Get score
+        double score = getScorePerHour(activity) * hours;
+        // Round to one digit
+        BigDecimal rounded = new BigDecimal(score);
+        rounded = rounded.setScale(1, RoundingMode.HALF_UP);
+        return rounded.doubleValue();
+    }
+
+    /**
      * Returns the value of time for this individual
      *
      * @return the value of time
