@@ -6,7 +6,6 @@ import com.martindisch.chronoscopy.logic.ChrIndividual;
 import org.junit.Test;
 
 import java.util.Calendar;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,19 +28,78 @@ public class ChrIndividualTest {
 
     @Test
     public void valueTest() throws Exception {
-        Random r = new Random();
-        for (int i = 0; i < 100000; i++) {
-            int regret = r.nextInt(9) + 1;
-            int skill = r.nextInt(9) + 1;
-            int fun = r.nextInt(9) + 1;
-            int responsibility = r.nextInt(9) + 1;
-            int age = r.nextInt(100) + 1;
-            double leisure = r.nextInt(1191) / 10;
-            ChrIndividual individual = new ChrIndividual(
-                    regret, skill, fun, responsibility, age, leisure);
-            assertEquals(Math.log10((responsibility * age) / leisure) + 3,
-                    individual.getTimeValue(), 0.000001);
-        }
+        int regret = 5;
+        int age = 62;
+        double leisure = 98.8;
+        ChrIndividual individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(3.4966047492466448, individual.getTimeValue(), 0.000001);
+        regret = 2;
+        age = 39;
+        leisure = 28.3;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(3.44030816716619, individual.getTimeValue(), 0.000001);
+        regret = 3;
+        age = 56;
+        leisure = 7.1;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(4.374050933006788, individual.getTimeValue(), 0.000001);
+        regret = 5;
+        age = 44;
+        leisure = 14.7;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(4.17510534607403, individual.getTimeValue(), 0.000001);
+        regret = 8;
+        age = 35;
+        leisure = 118.0;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(3.375276024036094, individual.getTimeValue(), 0.000001);
+        regret = 8;
+        age = 32;
+        leisure = 24.3;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(4.022633691713537, individual.getTimeValue(), 0.000001);
+        regret = 1;
+        age = 56;
+        leisure = 10.2;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(3.7395878552442827, individual.getTimeValue(), 0.000001);
+        regret = 7;
+        age = 9;
+        leisure = 56.7;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(3.0457574905606752, individual.getTimeValue(), 0.000001);
+        regret = 7;
+        age = 23;
+        leisure = 104.9;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(3.186050387838292, individual.getTimeValue(), 0.000001);
+        regret = 7;
+        age = 84;
+        leisure = 11.4;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(4.712472474739666, individual.getTimeValue(), 0.000001);
+        regret = 1;
+        age = 1;
+        leisure = 1;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(3, individual.getTimeValue(), 0.000001);
+        regret = 10;
+        age = 100;
+        leisure = 119;
+        individual = new ChrIndividual(
+                9, 8, 5, regret, age, leisure);
+        assertEquals(3.9244530386074694, individual.getTimeValue(), 0.000001);
     }
 
     @Test
