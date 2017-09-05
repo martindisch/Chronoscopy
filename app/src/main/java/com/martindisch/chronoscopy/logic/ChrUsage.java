@@ -65,6 +65,31 @@ public class ChrUsage extends SugarRecord {
         return builder.toString();
     }
 
+    /**
+     * Returns the usage's time in hours.
+     *
+     * @return the time in hours
+     */
+    public double getTimeHours() {
+        String time = getTime();
+        // Make sure time is not 0, or any variation of 0, 0:00, etc.
+        if (time == null || time.length() == 0 || time.matches("^(0*)(:0*)?$")) {
+            return 0;
+        }
+        String[] components = time.split(":");
+        int hours, minutes;
+        if (components.length == 1) {
+            // We only have minutes
+            hours = 0;
+            minutes = Integer.parseInt(components[0]);
+        } else {
+            // We have hours and minutes
+            hours = Integer.parseInt(components[0]);
+            minutes = Integer.parseInt(components[1]);
+        }
+        return hours + minutes / 60.0;
+    }
+
     @Override
     public String toString() {
         return String.format(

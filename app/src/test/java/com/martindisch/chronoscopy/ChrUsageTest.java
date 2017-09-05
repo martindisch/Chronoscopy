@@ -13,6 +13,8 @@ public class ChrUsageTest {
         assertEquals("1 minute", usage.getTimeWorded());
         usage = new ChrUsage(0, "2017-09-03", "0:01");
         assertEquals("1 minute", usage.getTimeWorded());
+
+        assertEquals(0.016666667, usage.getTimeHours(), 0.000001);
     }
 
     @Test
@@ -21,6 +23,8 @@ public class ChrUsageTest {
         assertEquals("2 minutes", usage.getTimeWorded());
         usage = new ChrUsage(0, "2017-09-03", "0:02");
         assertEquals("2 minutes", usage.getTimeWorded());
+
+        assertEquals(0.033333333, usage.getTimeHours(), 0.000001);
     }
 
     @Test
@@ -29,6 +33,8 @@ public class ChrUsageTest {
         assertEquals("1 hour", usage.getTimeWorded());
         usage = new ChrUsage(0, "2017-09-03", "01:00");
         assertEquals("1 hour", usage.getTimeWorded());
+
+        assertEquals(1, usage.getTimeHours(), 0.000001);
     }
 
     @Test
@@ -37,6 +43,8 @@ public class ChrUsageTest {
         assertEquals("2 hours", usage.getTimeWorded());
         usage = new ChrUsage(0, "2017-09-03", "02:00");
         assertEquals("2 hours", usage.getTimeWorded());
+
+        assertEquals(2, usage.getTimeHours(), 0.000001);
     }
 
     @Test
@@ -45,6 +53,8 @@ public class ChrUsageTest {
         assertEquals("1 hour, 1 minute", usage.getTimeWorded());
         usage = new ChrUsage(0, "2017-09-03", "01:01");
         assertEquals("1 hour, 1 minute", usage.getTimeWorded());
+
+        assertEquals(1.016666667, usage.getTimeHours(), 0.000001);
     }
 
     @Test
@@ -53,6 +63,8 @@ public class ChrUsageTest {
         assertEquals("1 hour, 2 minutes", usage.getTimeWorded());
         usage = new ChrUsage(0, "2017-09-03", "01:02");
         assertEquals("1 hour, 2 minutes", usage.getTimeWorded());
+
+        assertEquals(1.033333333, usage.getTimeHours(), 0.000001);
     }
 
     @Test
@@ -61,6 +73,8 @@ public class ChrUsageTest {
         assertEquals("2 hours, 1 minute", usage.getTimeWorded());
         usage = new ChrUsage(0, "2017-09-03", "02:01");
         assertEquals("2 hours, 1 minute", usage.getTimeWorded());
+
+        assertEquals(2.016666667, usage.getTimeHours(), 0.000001);
     }
 
     @Test
@@ -69,6 +83,8 @@ public class ChrUsageTest {
         assertEquals("2 hours, 2 minutes", usage.getTimeWorded());
         usage = new ChrUsage(0, "2017-09-03", "02:02");
         assertEquals("2 hours, 2 minutes", usage.getTimeWorded());
+
+        assertEquals(2.033333333, usage.getTimeHours(), 0.000001);
     }
 
     @Test
@@ -81,5 +97,10 @@ public class ChrUsageTest {
         assertEquals("No time", usage2.getTimeWorded());
         assertEquals("No time", usage3.getTimeWorded());
         assertEquals("No time", usage4.getTimeWorded());
+
+        assertEquals(0, usage1.getTimeHours(), 0.000001);
+        assertEquals(0, usage2.getTimeHours(), 0.000001);
+        assertEquals(0, usage3.getTimeHours(), 0.000001);
+        assertEquals(0, usage4.getTimeHours(), 0.000001);
     }
 }
