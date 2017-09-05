@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.martindisch.chronoscopy.R;
 import com.martindisch.chronoscopy.logic.ChrActivity;
+import com.martindisch.chronoscopy.logic.ChrIndividual;
 import com.martindisch.chronoscopy.logic.ChrUsage;
 
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.List;
 public class UsageAdapter extends RecyclerView.Adapter<UsageAdapter.ViewHolder> {
 
     private List<ChrUsage> mUsages;
+    private ChrIndividual mIndividual;
 
-    public UsageAdapter(List<ChrUsage> mUsages) {
+    public UsageAdapter(List<ChrUsage> mUsages, ChrIndividual individual) {
         this.mUsages = mUsages;
+        this.mIndividual = individual;
     }
 
     @Override
@@ -29,10 +32,12 @@ public class UsageAdapter extends RecyclerView.Adapter<UsageAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final UsageAdapter.ViewHolder holder, int position) {
-        holder.tvName.setText(
-                ChrActivity.findById(
-                        ChrActivity.class, mUsages.get(position).getActivityId()).getName());
-        holder.tvValue.setText("2.1");
+        ChrActivity activity = ChrActivity.findById(
+                ChrActivity.class, mUsages.get(position).getActivityId());
+        holder.tvName.setText(activity.getName());
+        holder.tvValue.setText(
+                String.format("%.1f",
+                        mIndividual.getScore(activity, mUsages.get(position).getTimeHours())));
         holder.tvTime.setText(mUsages.get(position).getTimeWorded());
         holder.clRoot.setOnClickListener(new View.OnClickListener() {
             @Override

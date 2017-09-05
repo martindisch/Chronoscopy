@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.martindisch.chronoscopy.R;
+import com.martindisch.chronoscopy.logic.ChrIndividual;
 import com.martindisch.chronoscopy.logic.ChrUsage;
+import com.martindisch.chronoscopy.logic.Util;
 
 import java.util.List;
 
@@ -52,10 +54,13 @@ public class UsagesFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                // Read usages from DB
                 List<ChrUsage> usages = ChrUsage.find(
                         ChrUsage.class, null, null, null, "date DESC, id DESC", null
                 );
-                mAdapter = new UsageAdapter(usages);
+                // Build ChrIndividual from SharedPreferences
+                ChrIndividual individual = Util.getIndividual(getContext());
+                mAdapter = new UsageAdapter(usages, individual);
                 // Update RecyclerView in UI thread
                 mRvUsages.post(new Runnable() {
                     @Override
