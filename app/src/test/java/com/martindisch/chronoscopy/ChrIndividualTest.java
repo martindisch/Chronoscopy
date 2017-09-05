@@ -1,5 +1,6 @@
 package com.martindisch.chronoscopy;
 
+import com.martindisch.chronoscopy.logic.ChrActivity;
 import com.martindisch.chronoscopy.logic.ChrIndividual;
 
 import org.junit.Test;
@@ -41,5 +42,18 @@ public class ChrIndividualTest {
             assertEquals(Math.log10((responsibility * age) / leisure) + 3,
                     individual.getTimeValue(), 0.000001);
         }
+    }
+
+    @Test
+    public void scorePerHourTest() throws Exception {
+        ChrIndividual individual = new ChrIndividual(9, 8, 5, 8, 22, 43.5);
+        ChrActivity activity = new ChrActivity("Gaming", 2, 1, 4);
+        assertEquals(0.5, individual.getScorePerHour(activity), 0.000001);
+        activity = new ChrActivity("Learning", 4, 5, 2);
+        assertEquals(23.3, individual.getScorePerHour(activity), 0.000001);
+        activity = new ChrActivity("Being sick", 1, 1, 1);
+        assertEquals(0, individual.getScorePerHour(activity), 0.000001);
+        activity = new ChrActivity("Something impossible", 5, 5, 5);
+        assertEquals(67.8, individual.getScorePerHour(activity), 0.000001);
     }
 }

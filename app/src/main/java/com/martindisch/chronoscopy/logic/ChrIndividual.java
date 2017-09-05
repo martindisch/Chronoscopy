@@ -1,5 +1,7 @@
 package com.martindisch.chronoscopy.logic;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 
 /**
@@ -70,12 +72,33 @@ public class ChrIndividual {
     }
 
     /**
+     * Returns the score per hour that activity gives this individual.
+     *
+     * @param activity the activity to calculate the score per hour for
+     * @return the score per hour of this individual for activity
+     */
+    public double getScorePerHour(ChrActivity activity) {
+        double medium = (1 - (1 / (
+                activity.getRegret() + activity.getSkill() + activity.getFun()))) * Math.log10(
+                Math.pow(activity.getRegret(), getRegret()) *
+                        Math.pow(activity.getSkill(), getSkill()) *
+                        Math.pow(activity.getFun(), getFun()));
+        double scorePerHour = medium * Math.pow(
+                (medium / ((8.0 / 9) * (getRegret() + getSkill() + getFun()) * Math.log10(3))),
+                getTimeValue());
+        // Round to one digit
+        BigDecimal rounded = new BigDecimal(scorePerHour);
+        rounded = rounded.setScale(1, RoundingMode.HALF_UP);
+        return rounded.doubleValue();
+    }
+
+    /**
      * Returns the value of time for this individual
      *
      * @return the value of time
      */
     public double getTimeValue() {
-        return Math.log10((responsibility * age) / leisure) + 3;
+        return Math.log10((getResponsibility() * getAge()) / getLeisure()) + 3;
     }
 
     public int getRegret() {
