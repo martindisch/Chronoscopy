@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.martindisch.chronoscopy.R;
 import com.martindisch.chronoscopy.logic.ChrActivity;
+import com.martindisch.chronoscopy.logic.ChrIndividual;
 
 import java.util.List;
 
@@ -17,9 +18,11 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
     private Context mContext;
     private List<ChrActivity> mActivities;
+    private ChrIndividual mIndividual;
 
-    public ActivityAdapter(List<ChrActivity> mActivities, Context context) {
+    public ActivityAdapter(List<ChrActivity> mActivities, ChrIndividual individual, Context context) {
         this.mActivities = mActivities;
+        this.mIndividual = individual;
         this.mContext = context;
     }
 
@@ -33,7 +36,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ActivityAdapter.ViewHolder holder, int position) {
         holder.tvName.setText(mActivities.get(position).getName());
-        holder.tvValue.setText("X.Y / h");
+        holder.tvValue.setText(String.format(
+                "%.1f / h", mIndividual.getScorePerHour(mActivities.get(position))));
         holder.clRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

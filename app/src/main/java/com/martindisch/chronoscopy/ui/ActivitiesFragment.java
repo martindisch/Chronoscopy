@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.martindisch.chronoscopy.R;
 import com.martindisch.chronoscopy.logic.ChrActivity;
+import com.martindisch.chronoscopy.logic.ChrIndividual;
+import com.martindisch.chronoscopy.logic.Util;
 
 import java.util.List;
 
@@ -52,10 +54,13 @@ public class ActivitiesFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                // Read activities from DB
                 List<ChrActivity> activities = ChrActivity.find(
                         ChrActivity.class, null, null, null, "name ASC", null
                 );
-                mAdapter = new ActivityAdapter(activities, getContext());
+                // Build ChrIndividual from SharedPreferences
+                ChrIndividual individual = Util.getIndividual(getContext());
+                mAdapter = new ActivityAdapter(activities, individual, getContext());
                 // Update RecyclerView in UI thread
                 mRvActivities.post(new Runnable() {
                     @Override
