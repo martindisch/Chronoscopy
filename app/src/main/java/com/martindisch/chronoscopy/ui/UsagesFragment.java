@@ -80,6 +80,13 @@ public class UsagesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        updateUI();
+    }
+
+    /**
+     * Reload usages from DB and update RecyclerView.
+     */
+    public void updateUI() {
         // Request from DB off UI thread
         new Thread(new Runnable() {
             @Override
@@ -92,7 +99,7 @@ public class UsagesFragment extends Fragment {
                 ChrIndividual individual = Util.getIndividual(getContext());
                 mAdapter = new UsageAdapter(mUsages, individual);
                 // Update RecyclerView in UI thread
-                mRvUsages.post(new Runnable() {
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mRvUsages.setAdapter(mAdapter);

@@ -18,8 +18,9 @@ import android.view.View;
 import com.martindisch.chronoscopy.R;
 import com.orm.SugarContext;
 
-public class MainActivity extends AppCompatActivity
-        implements UsagesFragment.OnUsagesInteractionListener {
+public class MainActivity extends AppCompatActivity implements
+        UsagesFragment.OnUsagesInteractionListener,
+        ActivitiesFragment.OnActivitiesInteractionListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -91,6 +92,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onUsagesChanged() {
         mActivitiesFragment.updateUI();
+    }
+
+    @Override
+    public void onActivitiesChanged() {
+        mUsagesFragment.updateUI();
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

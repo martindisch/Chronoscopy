@@ -1,10 +1,12 @@
 package com.martindisch.chronoscopy.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,9 @@ public class ActivitiesFragment extends Fragment {
     private RecyclerView mRvActivities;
     private ActivityAdapter mAdapter;
     private TextView mTvScore, mTvTime, mTvEvaluation;
+    private List<ChrActivity> mActivities;
+
+    private OnActivitiesInteractionListener mListener;
 
     public ActivitiesFragment() {
         // Required empty public constructor
@@ -52,6 +57,35 @@ public class ActivitiesFragment extends Fragment {
         mRvActivities.addItemDecoration(new DividerItemDecoration(getActivity(),
                 layoutManager.getOrientation()));
         mRvActivities.setHasFixedSize(true);
+        ItemTouchHelper.SimpleCallback swipeCallback = new ItemTouchHelper.SimpleCallback(
+                0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                // Get activity that was swiped away
+                ChrActivity toDelete = mActivities.get(position);
+                // Delete usages of this activity
+                ChrUsage.deleteAll(ChrUsage.class, "activity_id = ?", toDelete.getId() + "");
+                // Delete the activity from DB
+                ChrActivity.delete(toDelete);
+                // Remove the activity from the list used by the adapter
+                mActivities.remove(position);
+                // Notify adapter of removal
+                mRvActivities.getAdapter().notifyItemRemoved(position);
+                // Update UI
+                updateUI();
+                // Notify MainActivity of data change
+                mListener.onActivitiesChanged();
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeCallback);
+        itemTouchHelper.attachToRecyclerView(mRvActivities);
         return view;
     }
 
@@ -63,12 +97,12 @@ public class ActivitiesFragment extends Fragment {
             @Override
             public void run() {
                 // Read activities from DB
-                List<ChrActivity> activities = ChrActivity.find(
+                mActivities = ChrActivity.find(
                         ChrActivity.class, null, null, null, "name ASC", null
                 );
                 // Build ChrIndividual from SharedPreferences
                 ChrIndividual individual = Util.getIndividual(getContext());
-                mAdapter = new ActivityAdapter(activities, individual, getContext());
+                mAdapter = new ActivityAdapter(mActivities, individual, getContext());
                 // Update RecyclerView in UI thread
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -115,5 +149,29 @@ public class ActivitiesFragment extends Fragment {
                 });
             }
         }).run();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnActivitiesInteractionListener) {
+            mListener = (OnActivitiesInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnActivitiesInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnActivitiesInteractionListener {
+        /**
+         * Called when the activities in database have changed and UI should be updated.
+         */
+        void onActivitiesChanged();
     }
 }
