@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private ActivitiesFragment mActivitiesFragment;
+    private UsagesFragment mUsagesFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +96,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                return ActivitiesFragment.newInstance();
+                mActivitiesFragment = ActivitiesFragment.newInstance();
+                return mActivitiesFragment;
             } else {
-                return UsagesFragment.newInstance();
+                mUsagesFragment = UsagesFragment.newInstance();
+                return mUsagesFragment;
             }
         }
 
