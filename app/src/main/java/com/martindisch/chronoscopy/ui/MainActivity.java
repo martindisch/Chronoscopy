@@ -18,7 +18,8 @@ import android.view.View;
 import com.martindisch.chronoscopy.R;
 import com.orm.SugarContext;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements UsagesFragment.OnUsagesInteractionListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -85,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         // Terminate SugarORM connection
         SugarContext.terminate();
+    }
+
+    @Override
+    public void onUsagesChanged() {
+        mActivitiesFragment.updateUI();
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
