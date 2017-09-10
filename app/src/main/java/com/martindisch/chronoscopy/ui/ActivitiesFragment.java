@@ -70,13 +70,26 @@ public class ActivitiesFragment extends Fragment {
                 ChrIndividual individual = Util.getIndividual(getContext());
                 mAdapter = new ActivityAdapter(activities, individual, getContext());
                 // Update RecyclerView in UI thread
-                mRvActivities.post(new Runnable() {
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mRvActivities.setAdapter(mAdapter);
                     }
                 });
+            }
+        }).start();
+        updateUI();
+    }
 
+    /**
+     * Updates the score, spent time and evaluation of the day.
+     */
+    public void updateUI() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Build ChrIndividual from SharedPreferences
+                ChrIndividual individual = Util.getIndividual(getContext());
                 // Read today's usages from DB
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 List<ChrUsage> usages = ChrUsage.find(ChrUsage.class, "date = ?", today);
@@ -92,7 +105,7 @@ public class ActivitiesFragment extends Fragment {
                 }
                 final double todayScore = cumulScore;
                 // Update status texts for today
-                mTvScore.post(new Runnable() {
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mTvScore.setText(String.format("%.1f", todayScore));
@@ -101,6 +114,6 @@ public class ActivitiesFragment extends Fragment {
                     }
                 });
             }
-        }).start();
+        }).run();
     }
 }
