@@ -31,7 +31,7 @@ public class Util {
     /**
      * Return the string representation of the usages' cumulated time.
      *
-     * @param usages List of usages
+     * @param usages list of usages
      * @return String representation of the usages' cumulated time
      */
     public static String getTimeTotal(List<ChrUsage> usages) {
