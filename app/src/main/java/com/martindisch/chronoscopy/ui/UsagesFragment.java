@@ -10,8 +10,10 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 
 import com.martindisch.chronoscopy.R;
+import com.martindisch.chronoscopy.logic.ChrEvaluation;
 import com.martindisch.chronoscopy.logic.ChrIndividual;
 import com.martindisch.chronoscopy.logic.ChrUsage;
 import com.martindisch.chronoscopy.logic.Util;
@@ -23,6 +25,7 @@ public class UsagesFragment extends Fragment {
     private RecyclerView mRvUsages;
     private UsageAdapter mAdapter;
     private List<ChrUsage> mUsages;
+    private RatingBar mRbEvaluation;
 
     private OnUsagesInteractionListener mListener;
 
@@ -41,6 +44,34 @@ public class UsagesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_usages, container, false);
         // Get views
         mRvUsages = (RecyclerView) view.findViewById(R.id.usages_rvUsages);
+        mRbEvaluation = (RatingBar) view.findViewById(R.id.usages_rbToday);
+
+        // Attempt reading today's rating from DB
+        List<ChrEvaluation> evaluation = ChrEvaluation.find(
+                ChrEvaluation.class, "date = ?", Util.getDate());
+        if (evaluation.size() > 0) {
+            // Restore rating
+            mRbEvaluation.setRating(evaluation.get(0).getRating());
+        }
+        mRbEvaluation.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                String date = Util.getDate();
+                // Build new evaluation
+                ChrEvaluation evaluation = new ChrEvaluation((int) v, date);
+                // Attempt reading today's previous rating from DB
+                List<ChrEvaluation> eval = ChrEvaluation.find(
+                        ChrEvaluation.class, "date = ?", date);
+                if (eval.size() > 0) {
+                    // Previous evaluation exists, update it
+                    evaluation.update();
+                } else {
+                    // First evaluation for today, save it
+                    evaluation.save();
+                }
+                mListener.onUsagesChanged();
+            }
+        });
 
         // Prepare RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

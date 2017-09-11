@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.martindisch.chronoscopy.R;
 import com.martindisch.chronoscopy.logic.ChrActivity;
+import com.martindisch.chronoscopy.logic.ChrEvaluation;
 import com.martindisch.chronoscopy.logic.ChrIndividual;
 import com.martindisch.chronoscopy.logic.ChrUsage;
 import com.martindisch.chronoscopy.logic.Util;
@@ -136,13 +137,21 @@ public class ActivitiesFragment extends Fragment {
                     cumulScore += individual.getScore(activity, usage.getTimeHours());
                 }
                 final double todayScore = cumulScore;
+                // Attempt reading today's evaluation
+                List<ChrEvaluation> evaluation = ChrEvaluation.find(
+                        ChrEvaluation.class, "date = ?", today);
+                int eval = 0;
+                if (evaluation.size() > 0) {
+                    eval = evaluation.get(0).getRating();
+                }
+                final int e = eval;
                 // Update status texts for today
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mTvScore.setText(String.format("%.1f", todayScore));
                         mTvTime.setText(todayTime);
-                        mTvEvaluation.setText("0 / 5");
+                        mTvEvaluation.setText(String.format("%d / 5", e));
                     }
                 });
             }

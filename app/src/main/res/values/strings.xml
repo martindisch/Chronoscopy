@@ -19,4 +19,5 @@
     <string name="error_time">Invalid duration</string>
     <string name="save">Save</string>
     <string name="invalid_inputs">Some inputs are invalid</string>
+    <string name="satisfaction">How satisfied are you with your day?</string>
 </resources>
