@@ -3,6 +3,8 @@ package com.martindisch.chronoscopy.logic;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -62,5 +64,14 @@ public class Util {
         totalMinutes -= remainingMinutes;
         totalHours += totalMinutes / 60;
         return String.format("%d:%02d", totalHours, remainingMinutes);
+    }
+
+    /**
+     * Return todays date in ISO 8601 (yyyy-MM-dd).
+     *
+     * @return the current date
+     */
+    public static String getDate() {
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     }
 }

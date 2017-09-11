@@ -18,8 +18,6 @@ import com.martindisch.chronoscopy.logic.ChrIndividual;
 import com.martindisch.chronoscopy.logic.ChrUsage;
 import com.martindisch.chronoscopy.logic.Util;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class ActivitiesFragment extends Fragment {
@@ -125,7 +123,7 @@ public class ActivitiesFragment extends Fragment {
                 // Build ChrIndividual from SharedPreferences
                 ChrIndividual individual = Util.getIndividual(getContext());
                 // Read today's usages from DB
-                String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                String today = Util.getDate();
                 List<ChrUsage> usages = ChrUsage.find(ChrUsage.class, "date = ?", today);
                 // Get spent time for the day
                 final String todayTime = Util.getTimeTotal(usages);

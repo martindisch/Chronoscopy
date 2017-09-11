@@ -17,12 +17,12 @@ import android.widget.TextView;
 import com.martindisch.chronoscopy.R;
 import com.martindisch.chronoscopy.logic.ChrActivity;
 import com.martindisch.chronoscopy.logic.ChrUsage;
+import com.martindisch.chronoscopy.logic.Util;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-public class NewActivityActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+public class NewActivityActivity extends AppCompatActivity
+        implements SeekBar.OnSeekBarChangeListener {
 
     private SeekBar mSbRegret, mSbSkill, mSbFun;
     private EditText mEtName, mEtDate, mEtTime;
@@ -69,10 +69,14 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
                     mTilDate.setError(getString(R.string.error_date));
                 }
             }
+
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
         });
         mEtTime.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,14 +87,18 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
                     mTilTime.setError(getString(R.string.error_time));
                 }
             }
+
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
         });
 
         // Set default date
-        mEtDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        mEtDate.setText(Util.getDate());
         // Load input if this is an existing activity
         Intent i = getIntent();
         if (i.hasExtra("name")) {
@@ -182,8 +190,11 @@ public class NewActivityActivity extends AppCompatActivity implements SeekBar.On
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {}
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
+
     @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {}
+    public void onStopTrackingTouch(SeekBar seekBar) {
+    }
 
 }
