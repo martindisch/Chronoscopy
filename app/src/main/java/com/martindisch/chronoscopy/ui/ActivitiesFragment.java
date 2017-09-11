@@ -58,7 +58,7 @@ public class ActivitiesFragment extends Fragment {
                 layoutManager.getOrientation()));
         mRvActivities.setHasFixedSize(true);
         ItemTouchHelper.SimpleCallback swipeCallback = new ItemTouchHelper.SimpleCallback(
-                0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
                                   RecyclerView.ViewHolder target) {
