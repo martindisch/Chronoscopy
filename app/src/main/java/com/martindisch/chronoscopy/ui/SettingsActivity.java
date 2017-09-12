@@ -7,18 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.martindisch.chronoscopy.R;
 
-public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, TextWatcher {
+public class SettingsActivity extends AppCompatActivity
+        implements SeekBar.OnSeekBarChangeListener, TextWatcher, View.OnClickListener {
 
     private SeekBar mSbRegret, mSbSkill, mSbFun, mSbResponsibility;
     private EditText mEtLeisure, mEtDate;
     private TextView mTvRegret, mTvSkill, mTvFun, mTvResponsibility;
     private TextInputLayout mTilDate;
+    private Button mExport;
 
     private static final String mDatePattern = "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$";
 
@@ -45,7 +49,7 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         mEtLeisure = (EditText) findViewById(R.id.settings_etLeisure);
         mEtDate = (EditText) findViewById(R.id.settings_etDate);
         mTilDate = (TextInputLayout) findViewById(R.id.settings_tilDate);
-
+        mExport = (Button) findViewById(R.id.settings_bExport);
 
         // Set listeners
         mSbRegret.setOnSeekBarChangeListener(this);
@@ -53,6 +57,7 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         mSbFun.setOnSeekBarChangeListener(this);
         mSbResponsibility.setOnSeekBarChangeListener(this);
         mEtDate.addTextChangedListener(this);
+        mExport.setOnClickListener(this);
 
         // Restore settings
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
@@ -120,13 +125,27 @@ public class SettingsActivity extends AppCompatActivity implements SeekBar.OnSee
         editor.commit();
     }
 
+    /**
+     * Export data.
+     */
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {}
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {}
+    public void onClick(View view) {
+        // TODO
+    }
 
     @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
+
     @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+    public void onStopTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
 }
