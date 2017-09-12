@@ -17,7 +17,9 @@ import android.widget.TextView;
 import com.martindisch.chronoscopy.R;
 import com.martindisch.chronoscopy.logic.ChrActivity;
 import com.martindisch.chronoscopy.logic.ChrEvaluation;
+import com.martindisch.chronoscopy.logic.ChrIndividual;
 import com.martindisch.chronoscopy.logic.ChrUsage;
+import com.martindisch.chronoscopy.logic.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -142,43 +144,62 @@ public class SettingsActivity extends AppCompatActivity
             @Override
             public void run() {
                 try {
-                    JSONObject activities = new JSONObject();
-                    JSONArray usages = new JSONArray();
+                    // Get individual for calculation of scores
+                    ChrIndividual individual = Util.getIndividual(getApplicationContext());
+
+                    JSONObject jsonActivities = new JSONObject();
+                    JSONArray jsonUsages = new JSONArray();
                     // Go through all activities
                     for (ChrActivity activity : ChrActivity.listAll(ChrActivity.class)) {
                         // Collect properties of the activity
-                        JSONObject currentActivity = new JSONObject();
-                        currentActivity.put("regret", activity.getRegret());
-                        currentActivity.put("skill", activity.getSkill());
-                        currentActivity.put("fun", activity.getFun());
+                        JSONObject jsonActivity = new JSONObject();
+                        jsonActivity.put("regret", activity.getRegret());
+                        jsonActivity.put("skill", activity.getSkill());
+                        jsonActivity.put("fun", activity.getFun());
+                        jsonActivity.put("score_per_hour",
+                                individual.getScorePerHour(activity));
                         // Add the activity to activities
-                        activities.put(activity.getName(), currentActivity);
+                        jsonActivities.put(activity.getName(), jsonActivity);
 
                         // Go through all usages of the activity
                         for (ChrUsage usage : ChrUsage.find(
                                 ChrUsage.class, "activity_id = ?", activity.getId() + "")) {
                             // Collect properties of the usage
-                            JSONObject currentUsage = new JSONObject();
-                            currentUsage.put("activity", activity.getName());
-                            currentUsage.put("date", usage.getDate());
-                            currentUsage.put("time", usage.getTime());
+                            JSONObject jsonUsage = new JSONObject();
+                            jsonUsage.put("activity", activity.getName());
+                            jsonUsage.put("date", usage.getDate());
+                            jsonUsage.put("time", usage.getTime());
+                            jsonUsage.put("score",
+                                    individual.getScore(activity, usage.getTimeHours()));
                             // Add the usage to usages
-                            usages.put(currentUsage);
+                            jsonUsages.put(jsonUsage);
                         }
                     }
 
-                    JSONObject evaluations = new JSONObject();
+                    JSONObject jsonEvaluations = new JSONObject();
                     // Go through all evaluations
                     for (ChrEvaluation evaluation : ChrEvaluation.listAll(ChrEvaluation.class)) {
                         // Add the evaluation to evaluations
-                        evaluations.put(evaluation.getDate(), evaluation.getRating());
+                        jsonEvaluations.put(evaluation.getDate(), evaluation.getRating());
                     }
+
+                    // Build individual
+                    JSONObject jsonIndividual = new JSONObject();
+                    jsonIndividual.put("age", individual.getAge());
+                    jsonIndividual.put("leisure", individual.getLeisure());
+                    jsonIndividual.put("responsibility", individual.getResponsibility());
+                    jsonIndividual.put("regret", individual.getRegret());
+                    jsonIndividual.put("skill", individual.getSkill());
+                    jsonIndividual.put("fun", individual.getFun());
+                    jsonIndividual.put("qTime", individual.getTimeValue());
 
                     // Build collection of all data
                     JSONObject data = new JSONObject();
-                    data.put("activities", activities);
-                    data.put("usages", usages);
-                    data.put("evaluations", evaluations);
+                    data.put("activities", jsonActivities);
+                    data.put("usages", jsonUsages);
+                    data.put("evaluations", jsonEvaluations);
+                    data.put("individual", jsonIndividual);
+
                     Log.e("FFF", data.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
