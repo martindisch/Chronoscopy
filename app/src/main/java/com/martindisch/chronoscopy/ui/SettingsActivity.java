@@ -1,13 +1,15 @@
 package com.martindisch.chronoscopy.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,12 @@ import com.martindisch.chronoscopy.logic.Util;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class SettingsActivity extends AppCompatActivity
         implements SeekBar.OnSeekBarChangeListener, TextWatcher, View.OnClickListener {
@@ -200,8 +208,31 @@ public class SettingsActivity extends AppCompatActivity
                     data.put("evaluations", jsonEvaluations);
                     data.put("individual", jsonIndividual);
 
-                    Log.e("FFF", data.toString());
+                    // Create and write output file in cache directory
+                    File outFile = new File(
+                            getApplicationContext().getCacheDir(), Util.getDate() + ".json");
+                    OutputStreamWriter writer = new OutputStreamWriter(
+                            new FileOutputStream(outFile));
+                    writer.write(data.toString());
+                    writer.close();
+
+                    // Get URI from FileProvider
+                    Uri contentUri = FileProvider.getUriForFile(getApplicationContext(),
+                            "com.martindisch.chronoscopy.fileprovider", outFile);
+
+                    // Create sharing intent
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    // Temporary permission for receiving app to read this file
+                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    shareIntent.setType("application/json");
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                    startActivity(Intent.createChooser(shareIntent, "Choose an app"));
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
