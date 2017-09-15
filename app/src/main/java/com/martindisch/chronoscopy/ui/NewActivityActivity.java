@@ -106,6 +106,8 @@ public class NewActivityActivity extends AppCompatActivity
             mSbRegret.setProgress((int) (i.getDoubleExtra("regret", 20.0) * 10 - 10));
             mSbSkill.setProgress((int) (i.getDoubleExtra("skill", 20.0) * 10 - 10));
             mSbFun.setProgress((int) (i.getDoubleExtra("fun", 20.0) * 10 - 10));
+            // Set focus on duration for quicker editing
+            mEtTime.requestFocus();
         }
     }
 
