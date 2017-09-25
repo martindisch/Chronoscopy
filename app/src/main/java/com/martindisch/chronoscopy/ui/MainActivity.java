@@ -91,12 +91,16 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onUsagesChanged() {
-        mActivitiesFragment.updateUI();
+        if (mActivitiesFragment != null) {
+            mActivitiesFragment.updateUI();
+        }
     }
 
     @Override
     public void onActivitiesChanged() {
-        mUsagesFragment.updateUI();
+        if (mUsagesFragment != null) {
+            mUsagesFragment.updateUI();
+        }
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
